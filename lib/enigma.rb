@@ -1,5 +1,6 @@
 require 'simplecov'
 SimpleCov.start
+require 'date'
 
 class Enigma
   attr_reader :key,
@@ -28,6 +29,15 @@ class Enigma
     key_letters[:c] = c
     key_letters[:d] = d
     key_letters
+  end
+
+  def today
+    array = []
+    current_date = Date.today
+    array << current_date.month
+    array << current_date.day
+    array << current_date.year.to_s[2..3]
+    @date = array.join.to_i
   end
 
 end

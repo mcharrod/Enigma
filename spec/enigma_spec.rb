@@ -27,9 +27,15 @@ RSpec.describe Enigma do
 
   it 'makes A through D' do
     num = Enigma.new
-    
+
     expect(num.abcd.keys.count).to eq(4)
     expect(num.abcd.keys).to eq([:a, :b, :c, :d])
+  end
+
+  it 'creates a date' do
+    num = Enigma.new
+    num.today
+    expect(num.today).to eq(111121)
   end
 
 end
