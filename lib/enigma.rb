@@ -66,21 +66,4 @@ class Enigma
     the_shift[:d_shift] = the_offset[:d].to_i + key_letters[:d].to_i
     the_shift
   end
-
-
-
-  # def offset
-  #   four = []
-  #   squared = (date * date).to_s
-  #   four.append(squared[-4])
-  #   four.append(squared[-3])
-  #   four.append(squared[-2])
-  #   four.append(squared[-1])
-  #   four.join.to_i
-  # end
-
-  # a shift is the a key plus the a offset
-  # b shift is the b key plus the b offset
-
-
 end

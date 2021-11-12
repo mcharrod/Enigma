@@ -14,41 +14,40 @@ RSpec.describe Enigma do
   end
 
   it 'key is exactly 5 digits' do
-    num = Enigma.new
+    enigma = Enigma.new
 
-    expect(num.key.length).to eq(5)
+    expect(enigma.key.length).to eq(5)
   end
 
   it 'can be zero padded' do
-    num = Enigma.new
+    enigma = Enigma.new
 
-    allow(num).to receive(num.key).and_return("07529")
+    allow(enigma).to receive(enigma.key).and_return("07529")
   end
 
   it 'makes A through D' do
-    num = Enigma.new
+    enigma = Enigma.new
 
-    expect(num.abcd.keys.count).to eq(4)
-    expect(num.abcd.keys).to eq([:a, :b, :c, :d])
+    expect(enigma.abcd.keys.count).to eq(4)
+    expect(enigma.abcd.keys).to eq([:a, :b, :c, :d])
   end
 
   it 'creates a date' do
-    num = Enigma.new
-    num.date
+    enigma = Enigma.new
+    enigma.date
 
-    expect(num.date).to eq(111121)
+    expect(enigma.date).to eq(111121)
   end
 
   it 'retrieves last 4 digits for the dates current offset' do
-    num = Enigma.new
+    enigma = Enigma.new
 
-    expect(num.offset).to eq({:a=>"6", :b=>"6", :c=>"4", :d=>"1"})
+    expect(enigma.offset).to eq({:a=>"6", :b=>"6", :c=>"4", :d=>"1"})
   end
 
   it 'assigns 4 digit offset to ABCD' do
-    num = Enigma.new
+    enigma = Enigma.new
 
-    expect(num.forward_shift.keys).to eq([:a_shift, :b_shift, :c_shift, :d_shift])
+    expect(enigma.forward_shift.keys).to eq([:a_shift, :b_shift, :c_shift, :d_shift])
   end
-
 end
