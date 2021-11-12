@@ -1,11 +1,12 @@
 require 'simplecov'
-
 SimpleCov.start
 
 class Enigma
-  attr_reader :key
+  attr_reader :key,
+              :abcd
   def initialize
-    @key = generate_key
+    @key  = generate_key
+    @abcd = shift_by
   end
 
   def generate_key
@@ -14,6 +15,19 @@ class Enigma
       num.push(rand(0..9))
     end
     num.join
+  end
+
+  def shift_by
+    key_letters = {}
+    a = key[0..1]
+    b = key[1..2]
+    c = key[2..3]
+    d = key[3..4]
+    key_letters[:a] = a
+    key_letters[:b] = b
+    key_letters[:c] = c
+    key_letters[:d] = d
+    key_letters
   end
 
 end

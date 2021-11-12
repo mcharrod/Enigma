@@ -19,4 +19,17 @@ RSpec.describe Enigma do
     expect(num.key.length).to eq(5)
   end
 
-end 
+  it 'can be zero padded' do
+    num = Enigma.new
+
+    allow(num).to receive(num.key).and_return("07529")
+  end
+
+  it 'makes A through D' do
+    num = Enigma.new
+    
+    expect(num.abcd.keys.count).to eq(4)
+    expect(num.abcd.keys).to eq([:a, :b, :c, :d])
+  end
+
+end
