@@ -1,9 +1,7 @@
-
 require 'spec_helper'
 require './lib/enigma'
+require './lib/encrypt'
 require 'pry'
-
-
 
 RSpec.describe Enigma do
 
