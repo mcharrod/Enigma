@@ -4,10 +4,12 @@ require 'date'
 
 class Enigma
   attr_reader :key,
-              :abcd
+              :abcd,
+              :date
   def initialize
     @key  = generate_key
     @abcd = shift_by
+    @date = today
   end
 
   def generate_key
@@ -39,5 +41,16 @@ class Enigma
     array << current_date.year.to_s[2..3]
     @date = array.join.to_i
   end
+
+  def offset
+    four = []
+    squared = (date * date).to_s
+    four.append(squared[-4])
+    four.append(squared[-3])
+    four.append(squared[-2])
+    four.append(squared[-1])
+    four.join.to_i
+  end
+
 
 end

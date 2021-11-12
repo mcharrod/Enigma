@@ -34,8 +34,16 @@ RSpec.describe Enigma do
 
   it 'creates a date' do
     num = Enigma.new
+    num.date
+
+    expect(num.date).to eq(111121)
+  end
+
+  it 'retrieves last 4 digits for the offset' do
+    num = Enigma.new
     num.today
-    expect(num.today).to eq(111121)
+    
+    expect(num.offset).to eq(6641)
   end
 
 end
