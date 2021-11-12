@@ -39,11 +39,16 @@ RSpec.describe Enigma do
     expect(num.date).to eq(111121)
   end
 
-  it 'retrieves last 4 digits for the offset' do
+  it 'retrieves last 4 digits for the dates current offset' do
     num = Enigma.new
-    num.today
-    
-    expect(num.offset).to eq(6641)
+
+    expect(num.offset).to eq({:a=>"6", :b=>"6", :c=>"4", :d=>"1"})
+  end
+
+  it 'assigns 4 digit offset to ABCD' do
+    num = Enigma.new
+
+    expect(num.forward_shift.keys).to eq([:a_shift, :b_shift, :c_shift, :d_shift])
   end
 
 end

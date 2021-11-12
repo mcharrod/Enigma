@@ -5,11 +5,13 @@ require 'date'
 class Enigma
   attr_reader :key,
               :abcd,
-              :date
+              :date,
+              :offset
   def initialize
-    @key  = generate_key
-    @abcd = shift_by
-    @date = today
+    @key    = generate_key
+    @abcd   = key_letters
+    @date   = today
+    @offset = the_offset
   end
 
   def generate_key
@@ -20,7 +22,7 @@ class Enigma
     num.join
   end
 
-  def shift_by
+  def key_letters
     key_letters = {}
     a = key[0..1]
     b = key[1..2]
@@ -42,15 +44,43 @@ class Enigma
     @date = array.join.to_i
   end
 
-  def offset
-    four = []
+  def the_offset
+    offsets = {}
     squared = (date * date).to_s
-    four.append(squared[-4])
-    four.append(squared[-3])
-    four.append(squared[-2])
-    four.append(squared[-1])
-    four.join.to_i
+    a_offset = squared[-4]
+    b_offset = squared[-3]
+    c_offset = squared[-2]
+    d_offset = squared[-1]
+    offsets[:a] = a_offset
+    offsets[:b] = b_offset
+    offsets[:c] = c_offset
+    offsets[:d] = d_offset
+    offsets
   end
+
+  def forward_shift
+    the_shift = {}
+    the_shift[:a_shift] = the_offset[:a].to_i + key_letters[:a].to_i
+    the_shift[:b_shift] = the_offset[:b].to_i + key_letters[:b].to_i
+    the_shift[:c_shift] = the_offset[:c].to_i + key_letters[:c].to_i
+    the_shift[:d_shift] = the_offset[:d].to_i + key_letters[:d].to_i
+    the_shift
+  end
+
+
+
+  # def offset
+  #   four = []
+  #   squared = (date * date).to_s
+  #   four.append(squared[-4])
+  #   four.append(squared[-3])
+  #   four.append(squared[-2])
+  #   four.append(squared[-1])
+  #   four.join.to_i
+  # end
+
+  # a shift is the a key plus the a offset
+  # b shift is the b key plus the b offset
 
 
 end
