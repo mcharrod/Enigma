@@ -22,8 +22,6 @@ RSpec.describe Key do
     expect(key_object.key).to eq("07529")
   end
 
-
-
   it 'makes A through D' do
     key_object = Key.new("12345")
 
