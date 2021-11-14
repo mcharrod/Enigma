@@ -1,50 +1,70 @@
-require 'simplecov'
-SimpleCov.start
 require 'date'
 require 'pry'
 require_relative 'key'
+require_relative 'offset'
 
 class Enigma
+  include Generator
 
-  attr_reader :default_key
+  attr_reader :key,
+              :offset,
+              :chars
 
   def initialize
-    @default_key = Key.new
+    @key        = nil
+    @offset     = nil
+    @shifts     = {}
+    @chars      = ("a".."z").to_a << " "
+    @return_hash = {}
   end
 
-  def encrypt(message, key = default_key, date = today)
-    binding.pry
+  def chunks(message)
+    message.chars.each_slice(4).to_a
   end
 
-  #
-  # def generate_key
-  #   num = []
-  #   5.times do
-  #     num.push(rand(0..9))
-  #   end
-  #   @key = num.join
-  # end
-  #
-  # def key_letters
-  #   key_letters = {}
-  #   a = key[0..1]
-  #   b = key[1..2]
-  #   c = key[2..3]
-  #   d = key[3..4]
-  #   key_letters[:a] = a
-  #   key_letters[:b] = b
-  #   key_letters[:c] = c
-  #   key_letters[:d] = d
-  #   key_letters
-  # end
-
-
-  def forward_shift
-    the_shift = {}
-    the_shift[:a_shift] = the_offset[:a].to_i + key_letters[:a].to_i
-    the_shift[:b_shift] = the_offset[:b].to_i + key_letters[:b].to_i
-    the_shift[:c_shift] = the_offset[:c].to_i + key_letters[:c].to_i
-    the_shift[:d_shift] = the_offset[:d].to_i + key_letters[:d].to_i
-    the_shift
+  def scramble(message)
+    encrypted = []
+      chunks(message).each do |chunk|
+        encrypted.push(rotation(chunk[0], @shifts[:a_shift]))
+          encrypted.push(rotation(chunk[1], @shifts[:b_shift]))
+            encrypted.push(rotation(chunk[2], @shifts[:c_shift]))
+              encrypted.push(rotation(chunk[3], @shifts[:d_shift]))
+      end
+    @return_hash[:encryption] = encrypted.compact.flatten.join
   end
+
+  def rotation(character, the_shift)
+    if character != nil
+      character_ranking = @chars.index(character)
+      total = character_ranking + the_shift
+      @chars.rotate(total).first
+    end
+  end
+
+  def encrypt(message, key = generate_key, date = today)
+    if key.length == 6
+      date = key
+    elsif key.length != 5 && key.length != 6
+      puts "invalid input." # prompt to try again
+    end
+    @key = Key.new(key)
+    @offset = Offset.new(date)
+    total_shift
+    chunks(message)
+    scramble(message)
+    @return_hash[:key] = key
+    @return_hash[:date] = date
+    @return_hash
+  end
+
+  def total_shift
+     @shifts[:a_shift] = (@key.a_key.to_i + @offset.a_offset.to_i)
+     @shifts[:b_shift] = (@key.b_key.to_i + @offset.b_offset.to_i)
+     @shifts[:c_shift] = (@key.c_key.to_i + @offset.c_offset.to_i)
+     @shifts[:d_shift] = (@key.d_key.to_i + @offset.d_offset.to_i)
+     @shifts
+     # idea for refactor:
+     # @shifts [[key]_shift] = (@key.[key]_key + @offset.[offset]_offset)??
+  end
+
 end
