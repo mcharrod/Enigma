@@ -4,7 +4,6 @@ module Generator
     array = []
     current_date = Date.today
     array << current_date.month
-    binding.pry
     array << current_date.day
     array << current_date.year.to_s[2..3]
     @date = array.join

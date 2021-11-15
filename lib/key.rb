@@ -1,31 +1,20 @@
+require_relative 'generator_module'
+require 'pry'
+
 class Key
-  attr_reader :key
+  include Generator
+  attr_reader :key,
+              :a_key,
+              :b_key,
+              :c_key,
+              :d_key
 
   def initialize(key_arg = generate_key)
-    @key = key_arg
+    @key   = key_arg
+    @a_key = key[0..1]
+    @b_key = key[1..2]
+    @c_key = key[2..3]
+    @d_key = key[3..4]
   end
 
-  def generate_key
-    num = []
-    5.times do
-      num.push(rand(0..9))
-    end
-    @key = num.join
-  end
-
-  def a_key
-    a = key[0..1]
-  end
-
-  def b_key
-    b = key[1..2]
-  end
-
-  def c_key
-    c = key[2..3]
-  end
-
-  def d_key
-    d = key[3..4]
-  end
 end

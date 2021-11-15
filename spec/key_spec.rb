@@ -31,4 +31,10 @@ RSpec.describe Key do
     expect(key_object.d_key).to eq("45")
   end
 
+  it 'makes a date for line coverage' do
+    key = Key.new
+    key.today
+    expect(key.today.length).to eq(6)
+  end
+  
 end
