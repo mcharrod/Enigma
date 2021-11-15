@@ -1,6 +1,4 @@
 require 'spec_helper'
-require './lib/enigma'
-require './lib/encrypt'
 require './lib/offset'
 require 'pry'
 
@@ -9,7 +7,7 @@ RSpec.describe Offset do
   it 'creates a date' do
     offset = Offset.new
 
-    expect(offset.date.digits.count).to eq(6)
+    expect(offset.date.length).to eq(6)
   end
 
   it 'retrieves last 4 digits for the dates current offset' do
@@ -21,10 +19,10 @@ RSpec.describe Offset do
     expect(offset.d_offset).to eq("1")
   end
 
-  # it 'assigns 4 digit offset to ABCD' do
-  #   offset = Offset.new
-  #
-  #   expect(offset.forward_shift).to eq([:a_shift, :b_shift, :c_shift, :d_shift])
-  # end
+  it 'generates a key for line coverage' do
+    offset = Offset.new(111421)
+
+    expect(offset.generate_key.length).to eq(5)
+  end
 
 end
