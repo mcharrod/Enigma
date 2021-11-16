@@ -32,4 +32,13 @@ RSpec.describe Enigma do
 
     expect(enigma.decrypt(gibberish, "02715", "040895")).to eq(decrypted)
   end
+
+  it 'decrypts with no date' do
+    enigma = Enigma.new
+    result = enigma.encrypt("hello what's up")
+    gibberish_message = result[:encryption]
+    key = result[:key]
+
+    expect(enigma.decrypt(gibberish_message, key)[:decryption]).to eq("hello what's up")
+  end
 end
