@@ -9,8 +9,8 @@ enigma.encrypt("hello world", "87092", "102715")
 
 
 if ARGV.count != 4
-  puts "invalid input. Please enter your encrypted message file, the file you'd like to store your" + "\n"
-   "decrypted message, the key, and date."
+  puts "invalid input. Please enter your encrypted message file, the file you'd like to store your " +
+  "decrypted message, the key, and date."
 else
   key  = ARGV[2]
   date = ARGV[3]
