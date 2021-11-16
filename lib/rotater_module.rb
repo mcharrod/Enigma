@@ -11,7 +11,7 @@ module Rotater
     chunked(message.downcase).each_with_object("") do |chunk, string|
       [:a_shift, :b_shift, :c_shift, :d_shift].each_with_index do |shift, index|
         next if chunk[index].nil?
-
+        
         string << rotate(chunk[index], @shifts[shift])
       end
     end
