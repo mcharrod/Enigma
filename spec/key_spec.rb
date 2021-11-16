@@ -36,5 +36,4 @@ RSpec.describe Key do
     key.today
     expect(key.today.length).to eq(6)
   end
-  
 end

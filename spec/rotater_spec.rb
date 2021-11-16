@@ -14,7 +14,6 @@ RSpec.describe Rotater do
     enigma = Enigma.new
     decrypted = {decryption: "hello world", key: "02715", date: "040895"}
     gibberish = "keder ohulw"
-    # message = enigma.encrypt("hello world", "02715", "040895")
 
     expect(enigma.decrypt(gibberish, "02715", "040895")).to eq(decrypted)
   end
@@ -24,6 +23,7 @@ RSpec.describe Rotater do
     message = "!!! what up"
     enigma.encrypt(message, 12345, 101020)
     beginning = enigma.decrypt(message, 12345, 101020).values.last.start_with?("!!")
+
     expect(beginning).to eq(true)
   end
 
@@ -36,6 +36,4 @@ RSpec.describe Rotater do
 
     expect(enigma.decrypt(gibberish, key)[:decryption]).to eq(message.downcase)
   end
-
-
 end

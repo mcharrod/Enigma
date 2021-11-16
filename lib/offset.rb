@@ -18,5 +18,4 @@ class Offset
     @c_offset = squared[-2]
     @d_offset = squared[-1]
   end
-
 end

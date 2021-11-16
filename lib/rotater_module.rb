@@ -6,8 +6,6 @@ module Rotater
     message.chars.each_slice(4).to_a
   end
 
-
-
   # take the unencrypted message and run it through the encryptor
   def scrambler(message)
     chunked(message.downcase).each_with_object("") do |chunk, string|
@@ -19,7 +17,7 @@ module Rotater
     end
   end
 
-  # take the gibberish and translate to a language
+  # take the encrypted message and run it through the decryptor
   def decryptor(gibberish)
     chunked(gibberish).each_with_object("") do |chunk, string|
       [:a_shift, :b_shift, :c_shift, :d_shift].each_with_index do |shift, index|
@@ -38,5 +36,4 @@ module Rotater
     total = character_index + shift
     @character_array.rotate(total).first
   end
-
 end

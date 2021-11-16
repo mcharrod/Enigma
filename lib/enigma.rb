@@ -40,5 +40,4 @@ class Enigma
     @return_message[:decryption] = decryptor(gibberish)
     @return_message
   end
-
 end

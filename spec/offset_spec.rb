@@ -24,5 +24,4 @@ RSpec.describe Offset do
 
     expect(offset.generate_key.length).to eq(5)
   end
-
 end

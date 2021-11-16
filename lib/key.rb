@@ -17,5 +17,4 @@ class Key
     @c_key = key[2..3]
     @d_key = key[3..4]
   end
-
 end
