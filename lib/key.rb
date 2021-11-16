@@ -3,6 +3,7 @@ require 'pry'
 
 class Key
   include Generator
+  # Key class keeps track of key offsets for A, B, C, D
   attr_reader :key,
               :a_key,
               :b_key,

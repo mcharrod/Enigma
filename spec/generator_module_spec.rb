@@ -15,6 +15,6 @@ RSpec.describe Generator do
     offset = Offset.new
 
     expect(offset.date).to be_a(String)
-    expect(offset.date.digits.count).to eq(6)
+    expect(offset.date.length).to eq(6)
   end
 end
