@@ -10,13 +10,6 @@ RSpec.describe Enigma do
     expect(enigma).to be_a(Enigma)
   end
 
-  it 'can generate key' do
-    enigma = Enigma.new
-    enigma.generate_key
-
-    expect(enigma.key.length).to eq(5)
-  end
-
   it 'can generate date' do
     enigma = Enigma.new
     enigma.today

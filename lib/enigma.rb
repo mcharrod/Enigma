@@ -8,14 +8,12 @@ class Enigma
   include Generator
   include Rotater
 
-  # Enigma class encrypts and decrypts messages 
+  # Enigma class encrypts and decrypts messages
   attr_reader :key,
               :offset,
               :character_array
 
   def initialize
-    @key        = nil
-    @offset     = nil
     @shifts     = {}
     @character_array      = ("a".."z").to_a.push(" ")
     @return_gibberish = {}

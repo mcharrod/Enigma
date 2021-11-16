@@ -20,7 +20,7 @@ module Generator
     @date = array.join
   end
 
-  # generate a key if key is not given 
+  # generate a key if key is not given
   def generate_key
     num = []
     5.times do
