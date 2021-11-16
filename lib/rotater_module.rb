@@ -1,59 +1,51 @@
 module Rotater
-  # rotater module processes the message and rotates on A, B, C, D shifts. 
+  # rotater module processes the message and rotates on A, B, C, D shifts.
 
   # divide the message into arrays ("chunks") of 4 characters each
   def chunked(message)
     message.chars.each_slice(4).to_a
   end
 
+
+
   # take the unencrypted message and run it through the encryptor
   def scrambler(message)
-    encrypted = []
-      chunked(message.downcase).each do |chunk|
-        encrypted.push(forward_rotate(chunk[0], @shifts[:a_shift]))
-        encrypted.push(forward_rotate(chunk[1], @shifts[:b_shift]))
-        encrypted.push(forward_rotate(chunk[2], @shifts[:c_shift]))
-        encrypted.push(forward_rotate(chunk[3], @shifts[:d_shift]))
+    chunked(message.downcase).each_with_object("") do |chunk, string|
+      [:a_shift, :b_shift, :c_shift, :d_shift].each_with_index do |shift, index|
+        next if chunk[index].nil?
+
+        string << forward_rotate(chunk[index], @shifts[shift])
       end
-    encrypted.compact.flatten.join
+    end
   end
 
-  # take the encrypted message and run it through the decryptor
+  # take the gibberish and translate to a language 
   def decryptor(gibberish)
-    decrypted = []
-      chunked(gibberish).each do |chunk|
-        decrypted.push(reverse_rotate(chunk[0], @shifts[:a_shift]))
-        decrypted.push(reverse_rotate(chunk[1], @shifts[:b_shift]))
-        decrypted.push(reverse_rotate(chunk[2], @shifts[:c_shift]))
-        decrypted.push(reverse_rotate(chunk[3], @shifts[:d_shift]))
+    chunked(gibberish).each_with_object("") do |chunk, string|
+      [:a_shift, :b_shift, :c_shift, :d_shift].each_with_index do |shift, index|
+        next if chunk[index].nil?
+
+        string << reverse_rotate(chunk[index], @shifts[shift])
       end
-    decrypted.join
+    end
   end
 
   # take each character and obscure it by that character's shift
   def forward_rotate(character, shift)
-    if character != nil
-      if @character_array.include?(character) == false
-        character
-      else
-        character_ranking = @character_array.index(character)
-        total = character_ranking + shift
-        @character_array.rotate(total).first
-      end
-    end
+    return character unless @character_array.include?(character)
+
+    character_index = @character_array.index(character)
+    total = character_index + shift
+    @character_array.rotate(total).first
   end
 
   # take each character and revert it back to it's original character
   def reverse_rotate(character, shift)
-    if character != nil
-      if @character_array.include?(character) == false
-        character
-      else
-        char_index = @character_array.index(character)
-        total = char_index - shift
-        @character_array.rotate(total).first
-      end
-    end
+    return character unless @character_array.include?(character)
+
+      character_index = @character_array.index(character)
+      total = character_index - shift
+      @character_array.rotate(total).first
   end
 
 end
