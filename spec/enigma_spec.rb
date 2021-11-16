@@ -10,13 +10,6 @@ RSpec.describe Enigma do
     expect(enigma).to be_a(Enigma)
   end
 
-  it 'can generate key' do
-    enigma = Enigma.new
-    enigma.generate_key
-
-    expect(enigma.key.length).to eq(5)
-  end
-
   it 'can generate date' do
     enigma = Enigma.new
     enigma.today
@@ -38,5 +31,14 @@ RSpec.describe Enigma do
     # message = enigma.encrypt("hello world", "02715", "040895")
 
     expect(enigma.decrypt(gibberish, "02715", "040895")).to eq(decrypted)
+  end
+
+  it 'decrypts with no date' do
+    enigma = Enigma.new
+    result = enigma.encrypt("hello what's up")
+    gibberish_message = result[:encryption]
+    key = result[:key]
+
+    expect(enigma.decrypt(gibberish_message, key)[:decryption]).to eq("hello what's up")
   end
 end

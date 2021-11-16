@@ -8,14 +8,11 @@ class Enigma
   include Generator
   include Rotater
 
-  # Enigma class encrypts and decrypts messages 
-  attr_reader :key,
-              :offset,
+  # Enigma class encrypts and decrypts messages
+  attr_reader :offset,
               :character_array
 
   def initialize
-    @key        = nil
-    @offset     = nil
     @shifts     = {}
     @character_array      = ("a".."z").to_a.push(" ")
     @return_gibberish = {}
@@ -24,9 +21,9 @@ class Enigma
 
   # take the message and run it through an encryptor
   def encrypt(message, key = generate_key, date = today)
-    @key = Key.new(key)
+    @key_object = Key.new(key)
     @offset = Offset.new(date)
-    total_shift
+    total_shift(@key_object)
     @return_gibberish[:key] = key
     @return_gibberish[:date] = date
     @return_gibberish[:encryption] = scrambler(message)
@@ -34,11 +31,10 @@ class Enigma
   end
 
   # take the encrypted message and run it through a decryptor
-  def decrypt(message, key = @return_gibberish[:key], date = @return_gibberish[:date])
-    @key = Key.new(key)
+  def decrypt(gibberish, key, date = today)
+    @key_object = Key.new(key)
     @offset = Offset.new(date)
-    total_shift
-    gibberish = message
+    total_shift(@key_object)
     @return_message[:key] = key
     @return_message[:date] = date
     @return_message[:decryption] = decryptor(gibberish)

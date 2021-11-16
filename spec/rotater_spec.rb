@@ -27,12 +27,14 @@ RSpec.describe Rotater do
     expect(beginning).to eq(true)
   end
 
-  it 'can encrypt/decrypt with no key or date' do
+  it 'can encrypt/decrypt with no date' do
     enigma = Enigma.new
     message = "Hey friends hows it going the weather is clear sunny skies"
-    gobbledy_gook = enigma.encrypt(message)[:encryption]
+    result = enigma.encrypt(message)
+    key = result[:key]
+    gibberish = result[:encryption]
 
-    expect(enigma.decrypt(gobbledy_gook)[:decryption]).to eq(message.downcase)
+    expect(enigma.decrypt(gibberish, key)[:decryption]).to eq(message.downcase)
   end
 
 
