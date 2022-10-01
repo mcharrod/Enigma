@@ -1,17 +1,13 @@
-# Self assessment for Enigma project
+# Welcome to Enigma! 
 
-This project is a part of the Turing School of Software and Design 2110 Mod1 Backend Program. Project requirements can be found here: [Turing Enigma Project](https://backend.turing.edu/module1/projects/enigma/index)
+Enigma is a message encrypting and decrypting app. This project is a part of the Turing School of Software and Design Backend Program. Project requirements can be found here: [Turing Enigma Project](https://backend.turing.edu/module1/projects/enigma/index) 
 
-## Functionality - self-assessed score: 3
+## Setup 
 
-My project implements an encrypt method, a decrypt method, as well as a command line interface as per the expectations. I did not create a cracking method, so the functionality is about a 3.
+This is a command line interface app. First, you will need to clone down this repo. Navigate to this project using the `cd enigma` command. To use the encryption, you will write a message in the message.txt file. Then you will run the ruby command and name the file your message is stored in for the program to read it, then the file you want the encrypted message to go to, like this: `ruby encrypt.rb  message.txt encrypted.txt`. If you do not list this all, you will get an error message that looks like this: 
 
-## Object Oriented Programming - self-assessed score: 4
+`invalid input. Please enter the file your message is stored and the file you'd like to store your encrypted message in.`
 
-I outsourced some methods for generating keys, dates, and putting those together in a module so that my enigma class as well as each generator's corresponding class would have access to these methods rather than having to repeat the code. In addition, I created a rotater module to outsource the encryption and decryption components.
+Once your message has been encrypted, you will see it scrambled in the encrypted.txt file. The terminal will also tell you your randomly generated key and date that you will need to enter to decrypt your message. 
 
-I did my best to make sure each class was a reasonable length and only was responsible for the things related to that class, so I believe this is an above expectations delivery for 4 points. I have an understanding of the differences between inheritance and modules and believe that creating the modules I did for their corresponding functions was a logical decision.
-
-## Ruby Conventions and Mechanics - self-assessed score: 2.5
-
-Every method is tested with 100% coverage according to the [SimpleCov Coverage Report](file:///Users/katy/Documents/turing/1mod/projects/enigma/coverage/index.html#_AllFiles). Each part of the Enigma process is utilized and functions as expected, but specs were not committed ahead of files. For this, I would give myself a 2.5.
+To decrypt the message, you will need to enter the ruby command along with the location of your encrypted message, the location to store your decrypted message, the key, and the date. The key will always be 5 digits and the date will always be 6 digits. Example: `ruby decrypt.rb encrypted.txt decrypted.txt 87092 102715` 
