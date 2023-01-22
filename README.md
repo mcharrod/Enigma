@@ -13,3 +13,5 @@ Now, what is happening with this command? First, you're calling ruby to tell the
 Once your message has been encrypted, you will see it scrambled in the encrypted.txt file. The terminal will also tell you your randomly generated key and date that you will need to enter to decrypt your message. 
 
 To decrypt the message, you will need to enter the ruby command along with the location of your encrypted message, the location to store your decrypted message, the key, and the date. To avoid confusion, the key will always be 5 digits and the date will always be 6 digits. Your command will look something like this: `ruby decrypt.rb encrypted.txt decrypted.txt 87092 102715` 
+
+You will be see in the decrypted.txt that your message has been retrieved, and decrypted! If you want to see the computations I've used, the logic is stored in the encrypt.rb and the decrypt.rb files. 
