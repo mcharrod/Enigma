@@ -26,7 +26,7 @@ class Enigma
     total_shift(@key_object)
     @return_gibberish[:key] = key
     @return_gibberish[:date] = date
-    @return_gibberish[:encryption] = scrambler(message)
+    @return_gibberish[:encryption] = encryptor(message)
     @return_gibberish
   end
 

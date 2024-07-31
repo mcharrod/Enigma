@@ -4,9 +4,6 @@ require './lib/key'
 require './lib/offset'
 
 enigma = Enigma.new
-enigma.encrypt("hello world", "87092", "102715")
-
-
 
 if ARGV.count != 4
   puts "invalid input. Please enter your encrypted message file, the file you'd like to store your " +

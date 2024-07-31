@@ -7,8 +7,8 @@ module Rotater
   end
 
   # take the unencrypted message and run it through the encryptor
-  def scrambler(message)
-    chunked(message.downcase).each_with_object("") do |chunk, string|
+  def encryptor(message)
+    chunked(message).each_with_object("") do |chunk, string|
       [:a_shift, :b_shift, :c_shift, :d_shift].each_with_index do |shift, index|
         next if chunk[index].nil?
         

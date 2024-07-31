@@ -1,32 +1,36 @@
 module Generator
 
   # convert date into an integer
-  def num
-    date.to_i
-  end
+  # def date_to_num
+  #   date.to_s
+  #   date = date.day.to_s + date.month.to_s + date.
+  #   binding.pry
+  # end
 
-  # take the integer form of date then square it
+  # take the integer form of date then square it, then turn to string
   def squared
-    (num * num).to_s
+    (today * today).to_s
   end
 
   # create today's date if date is not given
   def today
     array = []
     current_date = Date.today
-    array << current_date.month
-    array << current_date.day
+    # array << current_date.month
+    array << current_date.month.to_s.rjust(2, '0')
+    # array << current_date.dayDate.today
+    array << current_date.day.to_s.rjust(2, '0')
     array << current_date.year.to_s[2..3]
-    @date = array.join
+    @date = array.join.to_i
   end
 
   # generate a key if key is not given
   def generate_key
-    num = []
+    date_to_num = []
     5.times do
-      num.push(rand(0..9))
+      date_to_num.push(rand(0..9))
     end
-    @key = num.join
+    @key = date_to_num.join
   end
 
 
